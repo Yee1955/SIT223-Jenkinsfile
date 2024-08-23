@@ -29,21 +29,29 @@ pipeline {
             post {
                 success {
                     echo '---- Unit and Integration Tests Stage Successful ----'
-                    emailext(
-                        subject: 'Unit and Integration Tests Stage Success - ${env.JOB_NAME} #${env.BUILD_NUMBER}',
-                        body: 'The unit and integration tests stage completed successfully.',
-                        to: '${RECIPIENT}',
-                        attachLog: true
-                    )
+                    try {
+                        emailext(
+                            subject: 'Unit and Integration Tests Stage Success - ${env.JOB_NAME} #${env.BUILD_NUMBER}',
+                            body: 'The unit and integration tests stage completed successfully.',
+                            to: '${RECIPIENT}',
+                            attachLog: true
+                        )
+                    } catch (e) {
+                        echo 'Failed to send success email: ${e.getMessage()}'
+                    }
                 }
                 failure {
                     echo '---- Unit and Integration Tests Stage Failed ----'
-                    emailext(
-                        subject: 'Unit and Integration Tests Stage Failed - ${env.JOB_NAME} #${env.BUILD_NUMBER}',
-                        body: 'The unit and integration tests stage failed. Please check the attached logs for more details.',
-                        to: '${RECIPIENT}',
-                        attachLog: true
-                    )
+                    try {
+                        emailext(
+                            subject: 'Unit and Integration Tests Stage Failed - ${env.JOB_NAME} #${env.BUILD_NUMBER}',
+                            body: 'The unit and integration tests stage failed. Please check the attached logs for more details.',
+                            to: '${RECIPIENT}',
+                            attachLog: true
+                        )
+                    } catch (e) {
+                        echo 'Failed to send failure email: ${e.getMessage()}'
+                    }
                 }
             }
         }
