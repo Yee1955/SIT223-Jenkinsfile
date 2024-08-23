@@ -13,10 +13,13 @@ pipeline {
             }
             post {
                 success {
-                    echo '---- Build Stage Successful ----'
-                }
-                failure {
-                    echo '---- Build Stage Failed ----'
+                    echo "Recipient email: ${RECIPIENT}"  // This will display the recipient's email in the log
+                    emailext(
+                        subject: "Build successful - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                        body: "Here is the body of the email.",
+                        to: "${RECIPIENT}",
+                        attachLog: true
+                    )
                 }
             }
         }
