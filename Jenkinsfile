@@ -32,6 +32,7 @@ pipeline {
                     script {
                         try {
                             emailext(
+                                from: 'alice0312chong@gmail.com',
                                 subject: "Unit and Integration Tests Stage Success - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                                 body: "The unit and integration tests stage completed successfully.",
                                 to: "tyee11291129@gmail.com",
