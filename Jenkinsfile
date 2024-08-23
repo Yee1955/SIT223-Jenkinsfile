@@ -29,12 +29,15 @@ pipeline {
             post {
                 success {
                     echo '---- Unit and Integration Tests Stage Successful ----'
-                    emailext(
-                        subject: "Unit and Integration Tests Stage Success - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                        body: "The unit and integration tests stage completed successfully.",
-                        to: "alice0312chong@gmail.com",
-                        attachLog: true
-                    )
+                    mail to: 'alice0312chong@gmail.com',
+                    subject: "Test Email",
+                    body: "This is a test email."
+                    // emailext(
+                    //     subject: "Unit and Integration Tests Stage Success - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                    //     body: "The unit and integration tests stage completed successfully.",
+                    //     to: "alice0312chong@gmail.com",
+                    //     attachLog: true
+                    // )
                 }
                 failure {
                     echo '---- Unit and Integration Tests Stage Failed ----'
