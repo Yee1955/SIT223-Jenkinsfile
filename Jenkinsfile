@@ -32,7 +32,7 @@ pipeline {
                     emailext(
                         subject: 'Unit and Integration Tests Stage Success - ${env.JOB_NAME} #${env.BUILD_NUMBER}',
                         body: 'The unit and integration tests stage completed successfully.',
-                        to: '${env.RECIPIENT}',
+                        to: '${RECIPIENT}',
                         attachLog: true
                     )
                 }
@@ -41,7 +41,7 @@ pipeline {
                     emailext(
                         subject: 'Unit and Integration Tests Stage Failed - ${env.JOB_NAME} #${env.BUILD_NUMBER}',
                         body: 'The unit and integration tests stage failed. Please check the attached logs for more details.',
-                        to: '${env.RECIPIENT}',
+                        to: '${RECIPIENT}',
                         attachLog: true
                     )
                 }
@@ -75,7 +75,7 @@ pipeline {
                     emailext(
                         subject: 'Security Scan Success - ${env.JOB_NAME} #${env.BUILD_NUMBER}',
                         body: 'The Security Scan stage completed successfully.',
-                        to: '${env.RECIPIENT}',
+                        to: '${RECIPIENT}',
                         attachLog: true
                     )
                 }
@@ -84,7 +84,7 @@ pipeline {
                     emailext(
                         subject: 'Security Scan Failed - ${env.JOB_NAME} #${env.BUILD_NUMBER}',
                         body: 'The Security Scan stage failed. Please check the attached logs for more details.',
-                        to: '${env.RECIPIENT}',
+                        to: '${RECIPIENT}',
                         attachLog: true
                     )
                 }
@@ -118,7 +118,7 @@ pipeline {
                     emailext(
                         subject: 'Integration Tests on Staging Stage Success - ${env.JOB_NAME} #${env.BUILD_NUMBER}',
                         body: 'The integration tests on staging stage completed successfully.',
-                        to: '${env.RECIPIENT}',
+                        to: '${RECIPIENT}',
                         attachLog: true
                     )
                 }
@@ -127,7 +127,7 @@ pipeline {
                     emailext(
                         subject: 'Integration Tests on Staging Stage Failed - ${env.JOB_NAME} #${env.BUILD_NUMBER}',
                         body: 'The integration tests on staging stage failed. Please check the attached logs for more details.',
-                        to: '${env.RECIPIENT}',
+                        to: '${RECIPIENT}',
                         attachLog: true
                     )
                 }
