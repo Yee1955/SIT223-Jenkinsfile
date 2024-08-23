@@ -29,19 +29,12 @@ pipeline {
             post {
                 success {
                     echo '---- Unit and Integration Tests Stage Successful ----'
-                    script {
-                        try {
-                            emailext(
-                                from: 'alice0312chong@gmail.com',
-                                subject: "Unit and Integration Tests Stage Success - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                                body: "The unit and integration tests stage completed successfully.",
-                                to: "tyee11291129@gmail.com",
-                                attachLog: true
-                            )
-                        } catch (Exception e) {
-                            echo "Failed to send success email: ${e.getMessage()}"
-                        }
-                    }
+                    emailext(
+                        subject: "Unit and Integration Tests Stage Success - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                        body: "The unit and integration tests stage completed successfully.",
+                        to: "alice0312chong@gmail.com",
+                        attachLog: true
+                    )
                 }
                 failure {
                     echo '---- Unit and Integration Tests Stage Failed ----'
@@ -125,7 +118,7 @@ pipeline {
                     emailext(
                         subject: 'Integration Tests on Staging Stage Success - ${env.JOB_NAME} #${env.BUILD_NUMBER}',
                         body: 'The integration tests on staging stage completed successfully.',
-                        to: '${RECIPIENT}',
+                        to: 'alice0312chong@gmail.com',
                         attachLog: true
                     )
                 }
