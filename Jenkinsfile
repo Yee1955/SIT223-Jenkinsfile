@@ -34,7 +34,7 @@ pipeline {
                             emailext(
                                 subject: 'Unit and Integration Tests Stage Success - ${env.JOB_NAME} #${env.BUILD_NUMBER}',
                                 body: 'The unit and integration tests stage completed successfully.',
-                                to: 'alice0312chong@gmail.com',
+                                to: 'alice0312chong',
                                 attachLog: true
                             )
                         } catch (Exception e) {
@@ -81,7 +81,7 @@ pipeline {
                     emailext(
                         subject: 'Security Scan Success - ${env.JOB_NAME} #${env.BUILD_NUMBER}',
                         body: 'The Security Scan stage completed successfully.',
-                        to: '${RECIPIENT}',
+                        to: "${RECIPIENT}",
                         attachLog: true
                     )
                 }
@@ -90,7 +90,7 @@ pipeline {
                     emailext(
                         subject: 'Security Scan Failed - ${env.JOB_NAME} #${env.BUILD_NUMBER}',
                         body: 'The Security Scan stage failed. Please check the attached logs for more details.',
-                        to: '${RECIPIENT}',
+                        to: "${RECIPIENT}",
                         attachLog: true
                     )
                 }
