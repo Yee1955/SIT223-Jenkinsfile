@@ -32,9 +32,9 @@ pipeline {
                     script {
                         try {
                             emailext(
-                                subject: 'Unit and Integration Tests Stage Success - ${env.JOB_NAME} #${env.BUILD_NUMBER}',
-                                body: 'The unit and integration tests stage completed successfully.',
-                                to: 'alice0312chong',
+                                subject: "Unit and Integration Tests Stage Success - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                                body: "The unit and integration tests stage completed successfully.",
+                                to: "alice0312chong@gmail.com",
                                 attachLog: true
                             )
                         } catch (Exception e) {
