@@ -29,22 +29,19 @@ pipeline {
             post {
                 success {
                     echo '---- Unit and Integration Tests Stage Successful ----'
-                    mail to: 'alice0312chong@gmail.com',
-                    subject: "Test Email",
-                    body: "This is a test email."
-                    // emailext(
-                    //     subject: "Unit and Integration Tests Stage Success - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                    //     body: "The unit and integration tests stage completed successfully.",
-                    //     to: "alice0312chong@gmail.com",
-                    //     attachLog: true
-                    // )
+                    emailext(
+                        subject: "Unit and Integration Tests Stage Success - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                        body: "The unit and integration tests stage completed successfully.",
+                        to: "${RECIPIENT}",
+                        attachLog: true
+                    )
                 }
                 failure {
                     echo '---- Unit and Integration Tests Stage Failed ----'
                     emailext(
-                        subject: 'Unit and Integration Tests Stage Failed - ${env.JOB_NAME} #${env.BUILD_NUMBER}',
+                        subject: "Unit and Integration Tests Stage Failed - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                         body: 'The unit and integration tests stage failed. Please check the attached logs for more details.',
-                        to: '${RECIPIENT}',
+                        to: "${RECIPIENT}",
                         attachLog: true
                     )
                 }
@@ -76,7 +73,7 @@ pipeline {
                 success {
                     echo '---- Security Scan Successfull ----'
                     emailext(
-                        subject: 'Security Scan Success - ${env.JOB_NAME} #${env.BUILD_NUMBER}',
+                        subject: "Security Scan Success - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                         body: 'The Security Scan stage completed successfully.',
                         to: "${RECIPIENT}",
                         attachLog: true
@@ -85,7 +82,7 @@ pipeline {
                 failure {
                     echo '---- Security Scan Failed ----'
                     emailext(
-                        subject: 'Security Scan Failed - ${env.JOB_NAME} #${env.BUILD_NUMBER}',
+                        subject: "Security Scan Failed - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                         body: 'The Security Scan stage failed. Please check the attached logs for more details.',
                         to: "${RECIPIENT}",
                         attachLog: true
@@ -119,18 +116,18 @@ pipeline {
                 success {
                     echo '---- Integration Testing on Staging Stage Successful ----'
                     emailext(
-                        subject: 'Integration Tests on Staging Stage Success - ${env.JOB_NAME} #${env.BUILD_NUMBER}',
+                        subject: "Integration Tests on Staging Stage Success - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                         body: 'The integration tests on staging stage completed successfully.',
-                        to: 'alice0312chong@gmail.com',
+                        to: "${RECIPIENT}",
                         attachLog: true
                     )
                 }
                 failure {
                     echo '---- Integration Testing on Staging Failed ----'
                     emailext(
-                        subject: 'Integration Tests on Staging Stage Failed - ${env.JOB_NAME} #${env.BUILD_NUMBER}',
+                        subject: "Integration Tests on Staging Stage Failed - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                         body: 'The integration tests on staging stage failed. Please check the attached logs for more details.',
-                        to: '${RECIPIENT}',
+                        to: "${RECIPIENT}",
                         attachLog: true
                     )
                 }
