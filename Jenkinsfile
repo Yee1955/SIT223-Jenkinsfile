@@ -30,11 +30,12 @@ pipeline {
                 success {
                     echo '---- Unit and Integration Tests Stage Successful ----'
                     script {
+                        echo "Sending email to: ${RECIPIENT}"
                         try {
                             emailext(
                                 subject: 'Unit and Integration Tests Stage Success - ${env.JOB_NAME} #${env.BUILD_NUMBER}',
                                 body: 'The unit and integration tests stage completed successfully.',
-                                to: '${RECIPIENT}',
+                                to: "${RECIPIENT}",
                                 attachLog: true
                             )
                         } catch (Exception e) {
