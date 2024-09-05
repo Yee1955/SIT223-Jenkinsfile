@@ -1,58 +1,72 @@
 pipeline {
     agent any
-    
+
     environment {
         // Define environment variables
         DEPLOYMENT_PATH = '/path/to/deployment'
     }
 
+    tools {
+        // No specific tool required here for Node.js but ensure docker is available
+    }
+
     stages {
 
-        stage('Install dependencies') {
+        stage('Prepare') {
             steps {
-                script {
-                    // Use a Node.js Docker image to install dependencies
-                    docker.image('node:16').inside {
-                        sh 'npm install'
-                    }
-                }
+                echo 'Installing dependencies'
+                sh 'npm install'
             }
         }
 
         stage('Build') {
             steps {
-                script {
-                    // Build the application
-                    docker.image('node:16').inside {
-                        sh 'npm run build' // Make sure your package.json includes a "build" script
-                    }
-                }
+                echo 'Building Docker image'
+                sh 'docker build -t yourappname:latest .'
             }
         }
 
         stage('Test') {
             steps {
-                echo 'RUNNING TEST'
-                script {
-                    // Run tests
-                    docker.image('node:16').inside {
-                        sh 'npm test'
-                    }
-                }
+                echo 'Running Tests'
+                sh 'docker run --rm yourappname:latest npm test'
             }
         }
 
         stage('Deploy') {
             steps {
-                echo 'RUNNING DEPLOY'
+                echo 'Deploying to server'
+                // Add your deployment commands here, potentially using docker push to a registry
+                sh 'docker save yourappname:latest | ssh $DEPLOY_HOST docker load'
+                sh 'ssh $DEPLOY_HOST docker run -d --restart always --name yourapp -p 80:3000 yourappname:latest'
             }
         }
 
         stage('Release') {
             steps {
-                echo 'RUNNING RELEASE'
+                echo 'Releasing version'
+                // Additional commands for release management
             }
         }
 
+        stage('Cleanup') {
+            steps {
+                echo 'Cleaning up'
+                sh 'docker rmi yourappname:latest'
+            }
+        }
+
+    }
+
+    post {
+        success {
+            echo 'Pipeline completed successfully.'
+        }
+        failure {
+            echo 'Pipeline failed.'
+        }
+        always {
+            // Commands that always execute go here, e.g., cleanup tasks
+        }
     }
 }
