@@ -1,8 +1,11 @@
 pipeline {
     agent any
+    
     tools {
-            msbuild 'MSBuild'
+        // This should reference the .NET SDK you've configured under Global Tool Configuration in Jenkins
+        dotnet 'DotNet6' // Replace 'DotNet6' with the name of your .NET SDK installation
     }
+    
     environment {
         // Define environment variables
         DEPLOYMENT_PATH = '/path/to/deployment'
