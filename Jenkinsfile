@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools {
-            msbuild '.NET SDK 6'
+            msbuild 'MSBuild'
     }
     environment {
         // Define environment variables
