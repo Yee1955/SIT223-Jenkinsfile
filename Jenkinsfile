@@ -10,9 +10,9 @@ pipeline {
 
         stage('Build') {
             steps {
-                bat 'dotnet restore'
-                bat 'dotnet build --configuration Release'
-                bat 'dotnet publish -c Release -o published'
+                sh 'dotnet restore'
+                sh 'dotnet build --configuration Release'
+                sh 'dotnet publish -c Release -o published'
                 archiveArtifacts artifacts: 'published/**/*', fingerprint: true
             }
         }
