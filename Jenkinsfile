@@ -1,8 +1,6 @@
 pipeline {
     agent any
-    tools {
-            dotnet 'DotNet6'
-    }
+    
     environment {
         // Define environment variables
         DEPLOYMENT_PATH = '/path/to/deployment'
