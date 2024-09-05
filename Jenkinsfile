@@ -3,7 +3,7 @@ pipeline {
     
     tools {
         // This should reference the .NET SDK you've configured under Global Tool Configuration in Jenkins
-        dotnet 'DotNet6' // Replace 'DotNet6' with the name of your .NET SDK installation
+        dotnetsdk 'DotNet6' // Replace 'DotNet6' with the name of your .NET SDK installation
     }
     
     environment {
