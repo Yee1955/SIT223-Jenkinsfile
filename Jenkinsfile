@@ -6,10 +6,6 @@ pipeline {
         DEPLOYMENT_PATH = '/path/to/deployment'
     }
 
-    tools {
-        // No specific tool required here for Node.js but ensure docker is available
-    }
-
     stages {
 
         stage('Prepare') {
@@ -64,9 +60,6 @@ pipeline {
         }
         failure {
             echo 'Pipeline failed.'
-        }
-        always {
-            // Commands that always execute go here, e.g., cleanup tasks
         }
     }
 }
