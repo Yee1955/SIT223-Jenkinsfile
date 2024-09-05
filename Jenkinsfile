@@ -11,7 +11,12 @@ pipeline {
     }
 
     stages {
-
+        
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
         stage('Prepare') {
             steps {
                 echo 'Installing dependencies'
