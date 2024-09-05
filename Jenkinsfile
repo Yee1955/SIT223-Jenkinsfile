@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    tools {
+        nodejs "NodeJS"
+    }
+
     environment {
         // Define environment variables
         DEPLOYMENT_PATH = '/path/to/deployment'
