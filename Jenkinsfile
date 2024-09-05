@@ -1,11 +1,8 @@
 pipeline {
     agent any
-    
     tools {
-        // This should reference the .NET SDK you've configured under Global Tool Configuration in Jenkins
-        dotnetsdk 'DotNet6' // Replace 'DotNet6' with the name of your .NET SDK installation
+            dotnet 'DotNet6'
     }
-    
     environment {
         // Define environment variables
         DEPLOYMENT_PATH = '/path/to/deployment'
@@ -13,18 +10,37 @@ pipeline {
 
     stages {
 
+        stage('Install dependencies') {
+            steps {
+                script {
+                    // Use a Node.js Docker image to install dependencies
+                    docker.image('node:16').inside {
+                        sh 'npm install'
+                    }
+                }
+            }
+        }
+
         stage('Build') {
             steps {
-                sh 'dotnet restore'
-                sh 'dotnet build --configuration Release'
-                sh 'dotnet publish -c Release -o published'
-                archiveArtifacts artifacts: 'published/**/*', fingerprint: true
+                script {
+                    // Build the application
+                    docker.image('node:16').inside {
+                        sh 'npm run build' // Make sure your package.json includes a "build" script
+                    }
+                }
             }
         }
 
         stage('Test') {
             steps {
                 echo 'RUNNING TEST'
+                script {
+                    // Run tests
+                    docker.image('node:16').inside {
+                        sh 'npm test'
+                    }
+                }
             }
         }
 
