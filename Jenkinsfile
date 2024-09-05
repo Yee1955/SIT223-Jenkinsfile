@@ -2,6 +2,7 @@ pipeline {
     agent any
 
     environment {
+        // Define environment variables
         DEPLOYMENT_PATH = '/path/to/deployment'
     }
 
@@ -27,24 +28,19 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                echo 'RUNNING TEST'
+                echo 'RUNNING DEPLOY'
             }
         }
 
         stage('Release') {
             steps {
-                echo 'RUNNING TEST'
+                echo 'RUNNING RELEASE'
             }
         }
 
     }
 
     post {
-        always {
 
-        }
-        failure {
-
-        }
     }
 }
