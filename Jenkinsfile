@@ -1,6 +1,8 @@
 pipeline {
     agent any
-
+    tools {
+            msbuild '.NET SDK 6'
+    }
     environment {
         // Define environment variables
         DEPLOYMENT_PATH = '/path/to/deployment'
