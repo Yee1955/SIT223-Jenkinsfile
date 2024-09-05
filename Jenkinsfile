@@ -21,9 +21,6 @@ pipeline {
             steps {
                 echo 'RUNNING TEST'
             }
-            post {
-
-            }
         }
 
         stage('Deploy') {
